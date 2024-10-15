@@ -6,24 +6,35 @@ import { Response } from 'express';
 export class ScreenshotsController {
   constructor(private readonly screenshotsService: ScreenshotsService) {}
 
-  @Get('video/capture')
-  async captureVideo(
-    @Query('videoUrl') videoUrl: string,
+  @Get('capture/youtube-video')
+  async captureYoutubeVideo(
+    @Query('url') url: string,
     @Query('count') count: string,
     @Query('title') title: string,
   ) {
     const numberedCount = Number(count);
-    return this.screenshotsService.captureVideo(videoUrl, numberedCount, title);
+    return this.screenshotsService.captureYoutubeVideo(
+      url,
+      numberedCount,
+      title,
+    );
   }
 
-  @Get('video/:imageName')
-  async getImage(@Param('imageName') imageName: string, @Res() res: Response) {
-    const imagePath = await this.screenshotsService.getImage(imageName);
-    return res.sendFile(imagePath);
+  @Get('capture/coupang-thumbnail-image')
+  async captureCoupangThumbnailImage() {}
+
+  @Get(':screenshotName')
+  async getScreenshot(
+    @Param('screenshotName') screenshotName: string,
+    @Res() res: Response,
+  ) {
+    const screenshotPath =
+      await this.screenshotsService.getScreenshot(screenshotName);
+    return res.sendFile(screenshotPath);
   }
 
-  @Delete('video/:imageName')
-  async deleteImage(@Param('imageName') imageName: string) {
-    return this.screenshotsService.deleteImage(imageName);
+  @Delete(':screenshotName')
+  async deleteScreenshot(@Param('screenshotName') screenshotName: string) {
+    return this.screenshotsService.deleteScreenshot(screenshotName);
   }
 }
