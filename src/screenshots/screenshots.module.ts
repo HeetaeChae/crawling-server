@@ -5,5 +5,6 @@ import { ScreenshotsService } from './screenshots.service';
 @Module({
   controllers: [ScreenshotsController],
   providers: [ScreenshotsService],
+  exports: [ScreenshotsService],
 })
 export class ScreenshotsModule {}

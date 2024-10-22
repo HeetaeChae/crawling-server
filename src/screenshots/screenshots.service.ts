@@ -8,7 +8,7 @@ export class ScreenshotsService {
   // 프로젝트 루트 디렉토리의 screenshot 폴더 경로 설정
   private readonly screenshotDir = resolve('assets');
 
-  // 비디오 캡쳐하기
+  // 유튜브 비디오 캡쳐하기
   async captureYoutubeVideo(url: string, count: number, title: string) {
     // 브라우저 열기
     const browser = await puppeteer.launch({
@@ -52,6 +52,16 @@ export class ScreenshotsService {
     }
 
     await browser.close();
+  }
+
+  // 쿠팡 랭킹 상품 썸네일 캡쳐
+  async captureRankedProductThumbnail(
+    page: puppeteer.Page,
+    productName: string,
+  ) {
+    const screenshotPath = resolve(this.screenshotDir, `${productName}.jpg`);
+    const thumbnail = await page.$('.prod-image__detail');
+    await thumbnail.screenshot({ path: screenshotPath });
   }
 
   // 이미지 가져오기

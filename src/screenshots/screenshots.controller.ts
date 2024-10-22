@@ -20,7 +20,7 @@ export class ScreenshotsController {
     );
   }
 
-  @Get('capture/coupang-thumbnail-image')
+  @Get('capture/coupang-ranked-product-thumbnail')
   async captureCoupangThumbnailImage() {}
 
   @Get(':screenshotName')
