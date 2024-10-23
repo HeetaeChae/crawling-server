@@ -59,8 +59,15 @@ export class ScreenshotsService {
     page: puppeteer.Page,
     productName: string,
   ) {
-    const screenshotPath = resolve(this.screenshotDir, `${productName}.jpg`);
+    const screenshotPath = resolve(this.screenshotDir, `${productName}.png`);
     const thumbnail = await page.$('.prod-image__detail');
+    await thumbnail.screenshot({ path: screenshotPath });
+  }
+
+  // 알리 상품 썸네일 캡쳐 (이미지가 video일 경우 로직)
+  async captureAliProductThumbnail(page: puppeteer.Page, productName: string) {
+    const screenshotPath = resolve(this.screenshotDir, `${productName}.png`);
+    const thumbnail = await page.$('.magnifier--behiver--Wxq3D7r');
     await thumbnail.screenshot({ path: screenshotPath });
   }
 

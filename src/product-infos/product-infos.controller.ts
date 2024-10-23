@@ -7,7 +7,6 @@ export class ProductInfosController {
 
   @Get('coupang/:keyword')
   async getRankedCoupangProductInfos(@Param('keyword') keyword: string) {
-    console.log(keyword);
     return this.productInfosService.getRankedCoupangProductInfos(keyword);
   }
 
